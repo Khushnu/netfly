@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:netfly/Model/cateogrymodel.dart';
 import 'package:netfly/Model/items_model.dart';
+import 'package:netfly/ResponiveHelper/responsive.dart';
+import 'package:netfly/Widgets/deleiveryoptions_widget.dart';
 import 'package:netfly/main.dart';
 
 class CategoryWidget extends StatefulWidget {
@@ -12,7 +14,7 @@ class CategoryWidget extends StatefulWidget {
 
 class _CategoryWidgetState extends State<CategoryWidget> {
   CategoryModel? data;
-
+ CategoryModel currentSelected = CategoryModel(text: 'Appetisers',);
   List<ItemsModel> itemsList = [
     ItemsModel(
         title: 'Chicken Momo',
@@ -38,7 +40,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
   ];
 
   List<CategoryModel> list = [
-    CategoryModel(text: 'Appetisers', isselected: true),
+    CategoryModel(text: 'Appetisers',),
     CategoryModel(text: '1953 Starters'),
     CategoryModel(text: 'Starters'),
     CategoryModel(text: '1953 special cusine'),
@@ -54,7 +56,287 @@ class _CategoryWidgetState extends State<CategoryWidget> {
   @override
   Widget build(BuildContext context) {
     screenWidth = MediaQuery.sizeOf(context).width;
-    return Column(
+   // print(screenWidth);
+    return Responsive.isMobileScreen(context) ? Column(
+      children: [
+        Container(
+          height: 55,
+          width: screenWidth,
+          color: Colors.white,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: list.map((e) {
+                // ignore: unrelated_type_equality_checks
+                bool isSelected = currentSelected == e;
+                data = e;
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                    onTap: () {
+                      // list[list.indexOf(e)].isselected =
+                      //     !list[list.indexOf(e)].isselected; 
+                      currentSelected =e ;
+                      setState(() {});
+                    },
+                    child: Container(
+                      height: 35,
+                      width: 114,
+                      decoration: BoxDecoration(
+                          color: isSelected
+                              ? const Color(0xff183861)
+                              : Colors.white,
+                          borderRadius: BorderRadius.circular(7)),
+                      child: Center(
+                          child: FittedBox(
+                        child: Text(
+                          e.text,
+                          style: TextStyle(
+                              color: isSelected ? Colors.white : Colors.black,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      )),
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ),
+        Wrap(
+          children: itemsList.map((e) {
+            return Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: InkWell(
+                onTap: () {},
+                child: Container(
+                  height: 192,
+                  width: screenWidth * 0.9 + 40,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: Colors.grey.shade300,
+                      )),
+                  padding: const EdgeInsets.all(10).copyWith(bottom: 1),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      Text(
+                        e.title,
+                        style: const TextStyle(
+                            fontSize: 30,
+                            color: Color(0xff183861),
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              e.description,
+                              style: const TextStyle(
+                                  fontSize: 17,
+                                  color: Color.fromARGB(255, 55, 58, 62),
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: SizedBox(
+                                height: 90,
+                                width: 90,
+                                child: Image.network(
+                                  e.image,
+                                  fit: BoxFit.fill,
+                                )),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.add_shopping_cart,
+                                size: 25,
+                              )),
+                          Text(
+                            '£${e.price}',
+                            style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff183861)),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }).toList(),
+        )
+      ],
+    ) : Responsive.isMediumScreen(context) ? Column(
+      children: [
+        Container(
+          height: 55,
+          width: screenWidth,
+          color: Colors.white,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: list.map((e) {
+                // ignore: unrelated_type_equality_checks
+                data = e;
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                    onTap: () {
+                      list[list.indexOf(e)].isselected =
+                          !list[list.indexOf(e)].isselected;
+
+                      setState(() {});
+                    },
+                    child: Container(
+                      height: 35,
+                      width: 114,
+                      decoration: BoxDecoration(
+                          color: e.isselected
+                              ? const Color(0xff183861)
+                              : Colors.white,
+                          borderRadius: BorderRadius.circular(7)),
+                      child: Center(
+                          child: FittedBox(
+                        child: Text(
+                          e.text,
+                          style: TextStyle(
+                              color: e.isselected ? Colors.white : Colors.black,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      )),
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ),
+        Align( 
+          alignment: Alignment.centerLeft,
+          child: Container(
+            width: screenWidth,
+            child: Stack(
+              children: [
+                const Align(
+                  alignment: Alignment.centerRight, 
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: DeliveryOptionWidget(),
+                  ),
+                ),
+                Wrap(
+                direction: Axis.horizontal,
+                  children: itemsList.map((e) {
+                    return Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: InkWell(
+                        onTap: () {},
+                        child: Container(
+                          height: 192,
+                          width: screenWidth * 0.5 ,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: Colors.grey.shade300,
+                              )),
+                          padding: const EdgeInsets.all(10).copyWith(bottom: 1),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 4,
+                              ),
+                              Text(
+                                e.title,
+                                style: const TextStyle(
+                                    fontSize: 30,
+                                    color: Color(0xff183861),
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      e.description,
+                                      style: const TextStyle(
+                                          fontSize: 17,
+                                          color: Color.fromARGB(255, 55, 58, 62),
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: SizedBox(
+                                        height: 90,
+                                        width: 90,
+                                        child: Image.network(
+                                          e.image,
+                                          fit: BoxFit.fill,
+                                        )),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.add_shopping_cart,
+                                        size: 25,
+                                      )),
+                                  Text(
+                                    '£${e.price}',
+                                    style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xff183861)),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ]
+            ),
+          ),
+        )
+      ],
+    ) : Column(
       children: [
         Container(
           height: 55,
