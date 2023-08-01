@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:netfly/Screens/login_screen.dart';
+import 'package:netfly/Screens/register_screen.dart';
 import 'package:netfly/Widgets/category_widget.dart';
-import 'package:netfly/Widgets/deleiveryoptions_widget.dart';
 import 'package:netfly/Widgets/topwidget.dart';
-
 import '../Widgets/drawer_widget.dart';
 
 class LargeScreen extends StatefulWidget {
@@ -25,14 +25,21 @@ class _LargeScreenState extends State<LargeScreen> {
               title: const Text('1963 Bar & Restaurant'),
               centerTitle: false,
               backgroundColor: const Color(0xff183861),
-              actions: const [
+              actions:  [
               Row(
                 children: [
-                    Text('Login'), 
-                  Divider(
-                    
+                   TextButton( 
+                  onPressed: ()=> const LoginScreen(),
+                  child: const Text('Login', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),), 
+                  const VerticalDivider(
+                    color: Colors.white,
+                    thickness: 2,
+                    indent: 5, 
+                    endIndent: 5,
                   ), 
-                  Text('Register')
+                   TextButton( 
+                  onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_)=> const RegisterScreen())),
+                  child: const Text('Register', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),),
                 ],
               )
               ],
@@ -48,7 +55,7 @@ class _LargeScreenState extends State<LargeScreen> {
                   // ignore: sized_box_for_whitespace
                   const TopWidget(),
                   const CategoryWidget(),
-                  const DeliveryOptionWidget(),
+                
                   const SizedBox(
                     height: 7,
                   ),

@@ -9,7 +9,7 @@ final Widget? mediumScreen;
 final Widget largeScreen;
 
 static bool isMobileScreen(BuildContext buildContext){
-  return MediaQuery.of(buildContext).size.width < 768;  
+  return MediaQuery.of(buildContext).size.width < 800;  
 }
 
 static bool isMediumScreen(BuildContext buildContext){

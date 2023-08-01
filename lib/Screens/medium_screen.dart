@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:netfly/Screens/login_screen.dart';
+import 'package:netfly/Screens/register_screen.dart';
 import 'package:netfly/Widgets/drawer_widget.dart';
 import 'package:netfly/Widgets/topwidget.dart';
 
@@ -25,17 +27,21 @@ class _MediumScreenState extends State<MediumScreen> {
               title: const Text('1963 Bar & Restaurant'),
               centerTitle: false,
               backgroundColor: const Color(0xff183861),
-              actions: const [
+              actions:  [
                Row(
                 children: [
-                  Text('Login'), 
-                  VerticalDivider(
+                  TextButton( 
+                  onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_)=> const LoginScreen())),
+                  child: const Text('Login', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),), 
+                  const VerticalDivider(
                     color: Colors.white,
                     thickness: 2,
                     indent: 5, 
                     endIndent: 5,
                   ), 
-                  Text('Register')
+                   TextButton( 
+                  onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_)=> const RegisterScreen())),
+                  child: const Text('Register', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),),
                 ],
                )
               ],

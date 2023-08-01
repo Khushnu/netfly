@@ -198,14 +198,14 @@ class _CategoryWidgetState extends State<CategoryWidget> {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: list.map((e) {
+                 bool isSelected = currentSelected == e;
                 // ignore: unrelated_type_equality_checks
                 data = e;
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: InkWell(
                     onTap: () {
-                      list[list.indexOf(e)].isselected =
-                          !list[list.indexOf(e)].isselected;
+                    currentSelected =e;
 
                       setState(() {});
                     },
@@ -213,7 +213,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                       height: 35,
                       width: 114,
                       decoration: BoxDecoration(
-                          color: e.isselected
+                          color: isSelected
                               ? const Color(0xff183861)
                               : Colors.white,
                           borderRadius: BorderRadius.circular(7)),
@@ -222,7 +222,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                         child: Text(
                           e.text,
                           style: TextStyle(
-                              color: e.isselected ? Colors.white : Colors.black,
+                              color: isSelected ? Colors.white : Colors.black,
                               fontWeight: FontWeight.bold),
                         ),
                       )),
@@ -346,14 +346,14 @@ class _CategoryWidgetState extends State<CategoryWidget> {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: list.map((e) {
+                 bool isSelected = currentSelected == e;
                 // ignore: unrelated_type_equality_checks
                 data = e;
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: InkWell(
                     onTap: () {
-                      list[list.indexOf(e)].isselected =
-                          !list[list.indexOf(e)].isselected;
+                      currentSelected =e;
 
                       setState(() {});
                     },
@@ -361,7 +361,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                       height: 35,
                       width: 114,
                       decoration: BoxDecoration(
-                          color: e.isselected
+                          color: isSelected
                               ? const Color(0xff183861)
                               : Colors.white,
                           borderRadius: BorderRadius.circular(7)),
@@ -370,7 +370,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                         child: Text(
                           e.text,
                           style: TextStyle(
-                              color: e.isselected ? Colors.white : Colors.black,
+                              color: isSelected ? Colors.white : Colors.black,
                               fontWeight: FontWeight.bold),
                         ),
                       )),
@@ -381,89 +381,107 @@ class _CategoryWidgetState extends State<CategoryWidget> {
             ),
           ),
         ),
-        Wrap(
-          children: itemsList.map((e) {
-            return Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: InkWell(
-                onTap: () {},
-                child: Container(
-                  height: 192,
-                  width: screenWidth * 0.9 + 40,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                        color: Colors.grey.shade300,
-                      )),
-                  padding: const EdgeInsets.all(10).copyWith(bottom: 1),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Text(
-                        e.title,
-                        style: const TextStyle(
-                            fontSize: 30,
-                            color: Color(0xff183861),
-                            fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              e.description,
-                              style: const TextStyle(
-                                  fontSize: 17,
-                                  color: Color.fromARGB(255, 55, 58, 62),
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: SizedBox(
-                                height: 90,
-                                width: 90,
-                                child: Image.network(
-                                  e.image,
-                                  fit: BoxFit.fill,
-                                )),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.add_shopping_cart,
-                                size: 25,
-                              )),
-                          Text(
-                            '£${e.price}',
-                            style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xff183861)),
-                          )
-                        ],
-                      )
-                    ],
+        Align( 
+          alignment: Alignment.centerLeft,
+          child: Container(
+            child: Stack( 
+              children: [ 
+                
+                const Align(
+                  alignment: Alignment.centerRight, 
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: DeliveryOptionWidget(),
                   ),
                 ),
+                Wrap(
+                  runSpacing: 1,
+                children: itemsList.map((e) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Container(
+                        height: 192,
+                        width: screenWidth * 0.3 + 40,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: Colors.grey.shade300,
+                            )),
+                        padding: const EdgeInsets.all(10).copyWith(bottom: 1),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            Text(
+                              e.title,
+                              style: const TextStyle(
+                                  fontSize: 30,
+                                  color: Color(0xff183861),
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    e.description,
+                                    style: const TextStyle(
+                                        fontSize: 17,
+                                        color: Color.fromARGB(255, 55, 58, 62),
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: SizedBox(
+                                      height: 90,
+                                      width: 90,
+                                      child: Image.network(
+                                        e.image,
+                                        fit: BoxFit.fill,
+                                      )),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.add_shopping_cart,
+                                      size: 25,
+                                    )),
+                                Text(
+                                  '£${e.price}',
+                                  style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xff183861)),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
               ),
-            );
-          }).toList(),
+              ]
+            ),
+          ),
         )
       ],
     );

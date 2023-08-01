@@ -165,7 +165,7 @@ class _DeliveryOptionWidgetState extends State<DeliveryOptionWidget> {
       ),
     ) : Container(
       height: 320,
-      width: screenWidth * 0.9 + 30,
+      width: screenWidth * 0.3,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
@@ -190,7 +190,7 @@ class _DeliveryOptionWidgetState extends State<DeliveryOptionWidget> {
                   },
                   child: Container(
                     height: 60,
-                    width: screenWidth * 0.2 - 30,
+                    width: screenWidth * 0.1 + 50 ,
                     color: isSlected
                         ? const Color(0xff183861)
                         : Colors.grey.shade200,
