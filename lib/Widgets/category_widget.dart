@@ -13,8 +13,9 @@ class CategoryWidget extends StatefulWidget {
 }
 
 class _CategoryWidgetState extends State<CategoryWidget> {
-  CategoryModel? data;
- CategoryModel currentSelected = CategoryModel(text: 'Appetisers',);
+  CategoryModel? data; 
+   bool? isSelected;
+ var currentSelected = CategoryModel(text: 'Appetisers',);
   List<ItemsModel> itemsList = [
     ItemsModel(
         title: 'Chicken Momo',
@@ -52,7 +53,13 @@ class _CategoryWidgetState extends State<CategoryWidget> {
     CategoryModel(text: 'Rice And Breads'),
     CategoryModel(text: 'Pizza')
   ];
+  
 
+@override
+  void initState() {
+    currentSelected=list.first;// TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     screenWidth = MediaQuery.sizeOf(context).width;
@@ -66,9 +73,11 @@ class _CategoryWidgetState extends State<CategoryWidget> {
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: list.map((e) {
-                // ignore: unrelated_type_equality_checks
-                bool isSelected = currentSelected == e;
+              children:
+              
+              List.generate(3, (index) {
+              var  e=list[index];
+                 isSelected = currentSelected == e;
                 data = e;
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -83,7 +92,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                       height: 35,
                       width: 114,
                       decoration: BoxDecoration(
-                          color: isSelected
+                          color: isSelected!
                               ? const Color(0xff183861)
                               : Colors.white,
                           borderRadius: BorderRadius.circular(7)),
@@ -92,14 +101,45 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                         child: Text(
                           e.text,
                           style: TextStyle(
-                              color: isSelected ? Colors.white : Colors.black,
+                              color: isSelected! ? Colors.white : Colors.black,
                               fontWeight: FontWeight.bold),
                         ),
                       )),
                     ),
                   ),
                 );
-              }).toList(),
+
+              })..add(Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: 
+                  PopupMenuButton(itemBuilder: (_)=>[
+                      for(int i=3;i<list.length;i++)
+                      PopupMenuItem(child: Container(
+                        width: screenWidth,
+                     
+                        child: Text(list[i].text)))
+                    ],
+                    child: Container(
+                      height: 35,
+                      width: 114,
+                      decoration: BoxDecoration(
+                       color: Colors.white,
+                          borderRadius: BorderRadius.circular(7)),
+                      child: const Row(
+                        children: [
+                          Text(
+                            'More',
+                            style: TextStyle(
+                                color:  Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Icon(Icons.more_horiz)
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              )
             ),
           ),
         ),
@@ -110,7 +150,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
               child: InkWell(
                 onTap: () {},
                 child: Container(
-                  height: 192,
+                  height: 196,
                   width: screenWidth * 0.9 + 40,
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -162,24 +202,38 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                           ),
                         ],
                       ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.add_shopping_cart,
-                                size: 25,
-                              )),
-                          Text(
-                            '£${e.price}',
-                            style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xff183861)),
-                          )
-                        ],
-                      )
+                     Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                InkWell( 
+                                  onTap: (){},
+                                  child: Container(
+                                    height: 30,
+                                    width: 40,
+                                    decoration: BoxDecoration(
+                                      color: Colors.lime.shade100, 
+                                      borderRadius: BorderRadius.circular(7)
+                                    ),
+                                    child: const Icon(
+                                        Icons.add_shopping_cart,
+                                        size: 25,
+                                      ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  '£${e.price}',
+                                  style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xff183861)),
+                                )
+                              ],
+                            )
                     ],
                   ),
                 ),
@@ -197,16 +251,19 @@ class _CategoryWidgetState extends State<CategoryWidget> {
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: list.map((e) {
+              children:
+              
+              List.generate(5, (index) {
+              var  e=list[index];
                  bool isSelected = currentSelected == e;
-                // ignore: unrelated_type_equality_checks
                 data = e;
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: InkWell(
                     onTap: () {
-                    currentSelected =e;
-
+                      // list[list.indexOf(e)].isselected =
+                      //     !list[list.indexOf(e)].isselected; 
+                      currentSelected =e ;
                       setState(() {});
                     },
                     child: Container(
@@ -229,12 +286,42 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                     ),
                   ),
                 );
-              }).toList(),
+
+              })..add(Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: 
+                  
+                  PopupMenuButton(itemBuilder: (_)=>[
+                      for(int i=5;i<list.length;i++)
+                      PopupMenuItem(child: Text(list[i].text))
+                    ],
+                    child: Container(
+                      height: 35,
+                      width: 114,
+                      decoration: BoxDecoration(
+                       color: Colors.white,
+                          borderRadius: BorderRadius.circular(7)),
+                      child: const Row(
+                        children: [
+                          Text(
+                            'More',
+                            style: TextStyle(
+                                color:  Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Icon(Icons.more_horiz)
+                        ],
+                      ),
+                    ),
+                  ),
+                ))
+             
             ),
           ),
         ),
         Align( 
           alignment: Alignment.centerLeft,
+          // ignore: sized_box_for_whitespace
           child: Container(
             width: screenWidth,
             child: Stack(
@@ -306,24 +393,38 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                                   ),
                                 ],
                               ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(
+                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                InkWell( 
+                                  onTap: (){},
+                                  child: Container(
+                                    height: 30,
+                                    width: 40,
+                                    decoration: BoxDecoration(
+                                      color: Colors.lime.shade100, 
+                                      borderRadius: BorderRadius.circular(7)
+                                    ),
+                                    child: const Icon(
                                         Icons.add_shopping_cart,
                                         size: 25,
-                                      )),
-                                  Text(
-                                    '£${e.price}',
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xff183861)),
-                                  )
-                                ],
-                              )
+                                      ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  '£${e.price}',
+                                  style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xff183861)),
+                                )
+                              ],
+                            )
                             ],
                           ),
                         ),
@@ -344,17 +445,20 @@ class _CategoryWidgetState extends State<CategoryWidget> {
           color: Colors.white,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            child: Row(
-              children: list.map((e) {
+            child:Row(
+              children:
+              
+              List.generate(5, (index) {
+              var  e=list[index];
                  bool isSelected = currentSelected == e;
-                // ignore: unrelated_type_equality_checks
                 data = e;
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: InkWell(
                     onTap: () {
-                      currentSelected =e;
-
+                      // list[list.indexOf(e)].isselected =
+                      //     !list[list.indexOf(e)].isselected; 
+                      currentSelected =e ;
                       setState(() {});
                     },
                     child: Container(
@@ -377,16 +481,47 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                     ),
                   ),
                 );
-              }).toList(),
+
+              })..add(Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: 
+                  
+                  PopupMenuButton(itemBuilder: (_)=>[
+                      for(int i=5;i<list.length;i++)
+                      PopupMenuItem(child: Text(list[i].text))
+                    ],
+                    child: Container(
+                      height: 35,
+                      width: 114,
+                      decoration: BoxDecoration(
+                       color: Colors.white,
+                          borderRadius: BorderRadius.circular(7)),
+                      child: const Row(
+                        children: [
+                          Text(
+                            'More',
+                            style: TextStyle(
+                                color:  Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Icon(Icons.more_horiz)
+                        ],
+                      ),
+                    ),
+                  ),
+                ))
+              //  list.map((e) {
+              //   // ignore: unrelated_type_equality_checks
+              //                }).toList(),
             ),
           ),
         ),
         Align( 
           alignment: Alignment.centerLeft,
+          // ignore: avoid_unnecessary_containers
           child: Container(
             child: Stack( 
-              children: [ 
-                
+              children: [         
                 const Align(
                   alignment: Alignment.centerRight, 
                   child: Padding(
@@ -395,15 +530,14 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                   ),
                 ),
                 Wrap(
-                  runSpacing: 1,
                 children: itemsList.map((e) {
                   return Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(left: 10, top: 10,),
                     child: InkWell(
                       onTap: () {},
                       child: Container(
                         height: 192,
-                        width: screenWidth * 0.3 + 40,
+                        width: screenWidth * 0.3 + 50,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
@@ -456,13 +590,27 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                             ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisSize: MainAxisSize.min,
                               children: [
-                                IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.add_shopping_cart,
-                                      size: 25,
-                                    )),
+                                InkWell( 
+                                  onTap: (){},
+                                  child: Container(
+                                    height: 30,
+                                    width: 40,
+                                    decoration: BoxDecoration(
+                                      color: Colors.lime.shade100, 
+                                      borderRadius: BorderRadius.circular(7)
+                                    ),
+                                    child: Icon(
+                                        Icons.add_shopping_cart,
+                                        size: 25,
+                                      ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
                                 Text(
                                   '£${e.price}',
                                   style: const TextStyle(

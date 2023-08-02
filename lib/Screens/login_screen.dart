@@ -18,6 +18,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
+    screenWidth = MediaQuery.sizeOf(context).width;
     return Responsive(mobileScreen: Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -32,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
                ),
             Container(
               height: 400, 
-              width: screenWidth * 0.5,
+              width: screenWidth * 0.5 + 120,
               decoration: BoxDecoration(
                color: Colors.white,
                borderRadius: BorderRadius.circular(12), 
@@ -114,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                ),
             Container(
               height: 400, 
-              width: screenWidth * 0.6,
+              width: screenWidth * 0.4 + 40,
               decoration: BoxDecoration(
                color: Colors.white,
                borderRadius: BorderRadius.circular(12), 
@@ -195,7 +196,7 @@ class _LoginScreenState extends State<LoginScreen> {
                ),
             Container(
               height: 400, 
-              width: screenWidth * 0.6,
+              width: screenWidth * 0.4 + 50,
               decoration: BoxDecoration(
                color: Colors.white,
                borderRadius: BorderRadius.circular(12), 

@@ -17,13 +17,13 @@ static bool isMediumScreen(BuildContext buildContext){
 }
 
 static bool isLargeScreen(BuildContext buildContext){
-  return MediaQuery.of(buildContext).size.width > 1200;
+  return MediaQuery.of(buildContext).size.width > 1180;
 }
 
   @override
   Widget build(BuildContext context) {
   return LayoutBuilder(builder: (_ , contstraint){
-    if(contstraint.maxWidth > 1200){
+    if(contstraint.maxWidth > 1180){
       return largeScreen; 
     } else if (contstraint.maxWidth >= 800 && contstraint.maxWidth <=1200){
       return mediumScreen ?? largeScreen;

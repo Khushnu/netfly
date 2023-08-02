@@ -11,7 +11,7 @@ class TopWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
-                  color: Color(0xffF5F5F5),
+                  color: const Color(0xffF5F5F5),
                   width: screenwidth,
                   height: 300,
                   child: Stack(
@@ -30,6 +30,7 @@ class TopWidget extends StatelessWidget {
                             fit: BoxFit.fill,),
                           ),
                          
+                                 // ignore: avoid_unnecessary_containers
                                  Container(child: const Text('1953 Bar & Restaurant', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold))), 
                          const SpacerWidget(width: 1,),
                          const Icon(Icons.star_border), 
@@ -45,6 +46,7 @@ class TopWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                    children: [
                      IconButton(onPressed: (){}, icon: const Icon(Icons.location_on)), 
+                    // ignore: avoid_unnecessary_containers
                     Container(
                       child: const TextWidget(text: '112 High St, Galashiels TD1 1SQ, United Kingdom', fontSize: 20)),
                    ],

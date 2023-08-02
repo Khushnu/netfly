@@ -29,7 +29,7 @@ class _LargeScreenState extends State<LargeScreen> {
               Row(
                 children: [
                    TextButton( 
-                  onPressed: ()=> const LoginScreen(),
+                  onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (_) => const LoginScreen())) ,
                   child: const Text('Login', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),), 
                   const VerticalDivider(
                     color: Colors.white,
@@ -58,6 +58,9 @@ class _LargeScreenState extends State<LargeScreen> {
                 
                   const SizedBox(
                     height: 7,
+                  ),
+                  const SizedBox(
+                    height: 16,
                   ),
                   Container(
                     width: screenwidth,
