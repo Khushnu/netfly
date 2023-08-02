@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:netfly/Widgets/spacer_widget.dart';
-import 'package:netfly/Widgets/text_widget.dart';
 
 class TopWidget extends StatelessWidget {
   const TopWidget({super.key});
@@ -13,87 +11,111 @@ class TopWidget extends StatelessWidget {
         Container(
                   color: const Color(0xffF5F5F5),
                   width: screenwidth,
-                  height: 300,
+                  height: 340,
+                  padding: const EdgeInsets.all(10),
                   child: Stack(
                     children: [
-                      Positioned(
-                        left: 20, 
-                        top: 20,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            ClipRRect(
-                            borderRadius: BorderRadius.circular(90),
-                            child: Image.network('https://plus.unsplash.com/premium_photo-1674203955625-dce611a93085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1035&q=80' , 
-                            height: 80, 
-                            width: 80,
-                            fit: BoxFit.fill,),
-                          ),
-                         
-                                 // ignore: avoid_unnecessary_containers
-                                 Container(child: const Text('1953 Bar & Restaurant', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold))), 
-                         const SpacerWidget(width: 1,),
-                         const Icon(Icons.star_border), 
-                        const Text('5.0', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-                        const SpacerWidget(width: 1,),
-                        ]),
+                      Padding(
+                        padding: const EdgeInsets.symmetric( vertical: 19, ),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              ClipRRect(
+                              borderRadius: BorderRadius.circular(90),
+                              child: Image.network('https://plus.unsplash.com/premium_photo-1674203955625-dce611a93085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1035&q=80' , 
+                              height: 80, 
+                              width: 80,
+                              fit: BoxFit.fill,),
+                            ),
+                           
+                                   // ignore: avoid_unnecessary_containers
+                                   Expanded(child: Container(child: const Text('1953 Bar & Restaurant', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)))), 
+                            const SizedBox(width: 14,),
+                           const Icon(Icons.star_border), 
+                          const Text('5.0', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                          const Spacer()
+                          
+                          ]),
+                        ),
                       ), 
-                       Positioned(
-                left: 90,
-                top: 80,
-                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                   children: [
-                     IconButton(onPressed: (){}, icon: const Icon(Icons.location_on)), 
-                    // ignore: avoid_unnecessary_containers
-                    Container(
-                      child: const TextWidget(text: '112 High St, Galashiels TD1 1SQ, United Kingdom', fontSize: 20)),
-                   ],
-                 ),
-               ), 
-                Positioned(
-                left: 90,
-                top: 124,
-                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                   children: [
-                     IconButton(onPressed: (){}, icon: const Icon(Icons.call)), 
-                    const TextWidget(text: '+44 1896 490132', fontSize: 20),
-                   ],
-                 ),
-               ), 
-               Positioned(
-                top: 170, 
-                left: 94,
-                 child: Container(
-                  height: 30, 
-                  width: 70,
-                  decoration:  BoxDecoration(
-                    color: Colors.green, 
-                    borderRadius: BorderRadius.circular(20)
+                       Padding(
+                         padding: const EdgeInsets.symmetric(vertical: 90, horizontal: 80),
+                         child: Align( 
+                          alignment: Alignment.topCenter,
+                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                             children: [
+                               IconButton(onPressed: (){}, icon: const Icon(Icons.location_on)), 
+                              // ignore: avoid_unnecessary_containers
+                              const Expanded(
+                                child: Text('112 High St, Galashiels TD1 1SQ, United Kingdom', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),),
+                              ),
+                             ],
+                           ),
+                         ),
+                       ), 
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(85, 15, 10,20),
+                  child: Align( 
+                    alignment: Alignment.centerLeft,
+                    child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.start,
+                     crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        IconButton(onPressed: (){}, icon: const Icon(Icons.call)), 
+                       const Text('+44 1896 490132', style:TextStyle(fontWeight: FontWeight.bold, )),
+                      ],
+                    ),
                   ),
-                   child: const Center(child: 
-                   Text('Open', style: TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.bold),),),
+                ), 
+               Padding(
+                 padding: const EdgeInsets.fromLTRB(90, 170, 30, 10),
+                 child: Align( 
+                  alignment: Alignment.centerLeft,
+                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                     children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                       Container(
+                        height: 30, 
+                        width: 70,
+                        decoration:  BoxDecoration(
+                          color: Colors.green, 
+                          borderRadius: BorderRadius.circular(20)
+                        ),
+                         child: const Center(child: 
+                         Text('Open', style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),),),
+                       ), 
+                        const SizedBox(
+                        height: 10,
+                      ),
+                       const Text('We are only offering collection orders at the moment', 
+                       style:TextStyle(color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold)), 
+                        const SizedBox(
+                        height: 10,
+                      ),
+                       const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround, 
+                        mainAxisSize: MainAxisSize.min,
+                       children: [
+                         Icon(Icons.work), 
+                         Text('13:00 - 02:00', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),)
+                       ],
+                       ),
+                     ],
+                   ),
                  ),
-               ), 
-               const Positioned(
-                top: 220, 
-                left: 94,
-                child: TextWidget(text: 'We are only offering collection orders at the moment', 
-               fontSize: 19, color: Colors.green,), 
-               ), 
-               const Positioned(
-                top: 250, 
-                left: 94,
-                child: Row(
-                children: [
-                  Icon(Icons.work), 
-                  TextWidget(text: '13:00 - 02:00', fontSize: 20)
-                ],
-               ))
+               )
                     ],
                   ),
                 ),

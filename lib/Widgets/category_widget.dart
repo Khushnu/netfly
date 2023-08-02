@@ -14,7 +14,7 @@ class CategoryWidget extends StatefulWidget {
 
 class _CategoryWidgetState extends State<CategoryWidget> {
   CategoryModel? data; 
-   bool? isSelected;
+ 
  var currentSelected = CategoryModel(text: 'Appetisers',);
   List<ItemsModel> itemsList = [
     ItemsModel(
@@ -40,109 +40,17 @@ class _CategoryWidgetState extends State<CategoryWidget> {
         price: 5.50)
   ];
 
-  List<CategoryModel> list = [
-    CategoryModel(text: 'Appetisers',),
-    CategoryModel(text: '1953 Starters'),
-    CategoryModel(text: 'Starters'),
-    CategoryModel(text: '1953 special cusine'),
-    CategoryModel(text: 'Traditional Curries'),
-    CategoryModel(text: 'Tandoori Grills'),
-    CategoryModel(text: 'Vegetarian Dishes'),
-    CategoryModel(text: 'Biryani Dishes'),
-    CategoryModel(text: 'Kids Menu'),
-    CategoryModel(text: 'Rice And Breads'),
-    CategoryModel(text: 'Pizza')
-  ];
+  
   
 
-@override
-  void initState() {
-    currentSelected=list.first;// TODO: implement initState
-    super.initState();
-  }
+
   @override
   Widget build(BuildContext context) {
     screenWidth = MediaQuery.sizeOf(context).width;
    // print(screenWidth);
     return Responsive.isMobileScreen(context) ? Column(
       children: [
-        Container(
-          height: 55,
-          width: screenWidth,
-          color: Colors.white,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children:
-              
-              List.generate(3, (index) {
-              var  e=list[index];
-                 isSelected = currentSelected == e;
-                data = e;
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    onTap: () {
-                      // list[list.indexOf(e)].isselected =
-                      //     !list[list.indexOf(e)].isselected; 
-                      currentSelected =e ;
-                      setState(() {});
-                    },
-                    child: Container(
-                      height: 35,
-                      width: 114,
-                      decoration: BoxDecoration(
-                          color: isSelected!
-                              ? const Color(0xff183861)
-                              : Colors.white,
-                          borderRadius: BorderRadius.circular(7)),
-                      child: Center(
-                          child: FittedBox(
-                        child: Text(
-                          e.text,
-                          style: TextStyle(
-                              color: isSelected! ? Colors.white : Colors.black,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      )),
-                    ),
-                  ),
-                );
-
-              })..add(Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: 
-                  PopupMenuButton(itemBuilder: (_)=>[
-                      for(int i=3;i<list.length;i++)
-                      PopupMenuItem(child: Container(
-                        width: screenWidth,
-                     
-                        child: Text(list[i].text)))
-                    ],
-                    child: Container(
-                      height: 35,
-                      width: 114,
-                      decoration: BoxDecoration(
-                       color: Colors.white,
-                          borderRadius: BorderRadius.circular(7)),
-                      child: const Row(
-                        children: [
-                          Text(
-                            'More',
-                            style: TextStyle(
-                                color:  Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Icon(Icons.more_horiz)
-                        ],
-                      ),
-                    ),
-                  ),
-                )
-              )
-            ),
-          ),
-        ),
+        
         Wrap(
           children: itemsList.map((e) {
             return Padding(
@@ -244,81 +152,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
       ],
     ) : Responsive.isMediumScreen(context) ? Column(
       children: [
-        Container(
-          height: 55,
-          width: screenWidth,
-          color: Colors.white,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children:
-              
-              List.generate(5, (index) {
-              var  e=list[index];
-                 bool isSelected = currentSelected == e;
-                data = e;
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    onTap: () {
-                      // list[list.indexOf(e)].isselected =
-                      //     !list[list.indexOf(e)].isselected; 
-                      currentSelected =e ;
-                      setState(() {});
-                    },
-                    child: Container(
-                      height: 35,
-                      width: 114,
-                      decoration: BoxDecoration(
-                          color: isSelected
-                              ? const Color(0xff183861)
-                              : Colors.white,
-                          borderRadius: BorderRadius.circular(7)),
-                      child: Center(
-                          child: FittedBox(
-                        child: Text(
-                          e.text,
-                          style: TextStyle(
-                              color: isSelected ? Colors.white : Colors.black,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      )),
-                    ),
-                  ),
-                );
-
-              })..add(Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: 
-                  
-                  PopupMenuButton(itemBuilder: (_)=>[
-                      for(int i=5;i<list.length;i++)
-                      PopupMenuItem(child: Text(list[i].text))
-                    ],
-                    child: Container(
-                      height: 35,
-                      width: 114,
-                      decoration: BoxDecoration(
-                       color: Colors.white,
-                          borderRadius: BorderRadius.circular(7)),
-                      child: const Row(
-                        children: [
-                          Text(
-                            'More',
-                            style: TextStyle(
-                                color:  Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Icon(Icons.more_horiz)
-                        ],
-                      ),
-                    ),
-                  ),
-                ))
-             
-            ),
-          ),
-        ),
+       
         Align( 
           alignment: Alignment.centerLeft,
           // ignore: sized_box_for_whitespace
@@ -439,83 +273,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
       ],
     ) : Column(
       children: [
-        Container(
-          height: 55,
-          width: screenWidth,
-          color: Colors.white,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child:Row(
-              children:
-              
-              List.generate(5, (index) {
-              var  e=list[index];
-                 bool isSelected = currentSelected == e;
-                data = e;
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    onTap: () {
-                      // list[list.indexOf(e)].isselected =
-                      //     !list[list.indexOf(e)].isselected; 
-                      currentSelected =e ;
-                      setState(() {});
-                    },
-                    child: Container(
-                      height: 35,
-                      width: 114,
-                      decoration: BoxDecoration(
-                          color: isSelected
-                              ? const Color(0xff183861)
-                              : Colors.white,
-                          borderRadius: BorderRadius.circular(7)),
-                      child: Center(
-                          child: FittedBox(
-                        child: Text(
-                          e.text,
-                          style: TextStyle(
-                              color: isSelected ? Colors.white : Colors.black,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      )),
-                    ),
-                  ),
-                );
-
-              })..add(Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: 
-                  
-                  PopupMenuButton(itemBuilder: (_)=>[
-                      for(int i=5;i<list.length;i++)
-                      PopupMenuItem(child: Text(list[i].text))
-                    ],
-                    child: Container(
-                      height: 35,
-                      width: 114,
-                      decoration: BoxDecoration(
-                       color: Colors.white,
-                          borderRadius: BorderRadius.circular(7)),
-                      child: const Row(
-                        children: [
-                          Text(
-                            'More',
-                            style: TextStyle(
-                                color:  Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Icon(Icons.more_horiz)
-                        ],
-                      ),
-                    ),
-                  ),
-                ))
-              //  list.map((e) {
-              //   // ignore: unrelated_type_equality_checks
-              //                }).toList(),
-            ),
-          ),
-        ),
+       
         Align( 
           alignment: Alignment.centerLeft,
           // ignore: avoid_unnecessary_containers

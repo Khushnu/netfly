@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:netfly/Screens/login_screen.dart';
 import 'package:netfly/Screens/register_screen.dart';
 import 'package:netfly/Widgets/drawer_widget.dart';
+import 'package:netfly/Widgets/header_widget.dart';
 import 'package:netfly/Widgets/topwidget.dart';
 
 import '../Widgets/category_widget.dart';
@@ -23,9 +24,14 @@ class _MediumScreenState extends State<MediumScreen> {
 
     return Scaffold(
             key: currentscaffoldsate,
-            appBar: AppBar(
-              title: const Text('1963 Bar & Restaurant'),
+            backgroundColor: const Color(0xffF5F5F5),
+            endDrawer: const DrawerWidget(),
+            body: CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                   title: const Text('1963 Bar & Restaurant'),
               centerTitle: false,
+              pinned: true,
               backgroundColor: const Color(0xff183861),
               actions:  [
                Row(
@@ -45,35 +51,40 @@ class _MediumScreenState extends State<MediumScreen> {
                 ],
                )
               ],
+                ),
+                
+            SliverToBoxAdapter(
+              child: TopWidget(),
             ),
-            backgroundColor: const Color(0xffF5F5F5),
-            endDrawer: const DrawerWidget(),
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  // ignore: sized_box_for_whitespace
-                  const TopWidget(),
-                  const CategoryWidget(),
-                //  const DeliveryOptionWidget(),
-                  const SizedBox(
-                    height: 7,
-                  ),
-                  Container(
-                    width: screenwidth,
-                    height: 40,
-                    color: const Color(0xff183861),
-                    child: const Center(
-                      child: Text(
-                        'Powered by Grub direct',
-                        style: TextStyle(color: Colors.white),
+
+
+                SliverPersistentHeader(
+                  pinned: true, 
+                  floating: true,
+                  delegate: HeaderWidget()),
+                
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [ const CategoryWidget(),
+                    //  const DeliveryOptionWidget(),
+                    const SizedBox(
+                      height: 7,
+                    ),
+                    Container(
+                      width: screenwidth,
+                      height: 40,
+                      color: const Color(0xff183861),
+                      child: const Center(
+                        child: Text(
+                          'Powered by Grub direct',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
-                  )
-                ],
-              ),
+                    ]
+                  ),
+                ),
+              ]
             ),
           );
   }

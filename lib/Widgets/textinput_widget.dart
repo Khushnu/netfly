@@ -25,7 +25,6 @@ class _TextInputWidgetState extends State<TextInputWidget> {
                       )
                     ), 
                     suffixIcon: Icon(widget.suffixicon), 
-                   
                   ),
                 );
   }
