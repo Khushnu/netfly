@@ -32,7 +32,6 @@ class TopWidget extends StatelessWidget {
                               width: 80,
                               fit: BoxFit.fill,),
                             ),
-                           
                                    // ignore: avoid_unnecessary_containers
                                    Expanded(child: Container(child: const Text('1953 Bar & Restaurant', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)))), 
                             const SizedBox(width: 14,),

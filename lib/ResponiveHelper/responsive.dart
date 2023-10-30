@@ -32,9 +32,4 @@ static bool isLargeScreen(BuildContext buildContext){
     }
   });
   }
-
- 
-
-
-
 }

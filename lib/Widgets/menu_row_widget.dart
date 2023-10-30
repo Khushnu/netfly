@@ -20,13 +20,14 @@ List<CategoryModel> list = [
     CategoryModel(text: '1953 Starters'),
     CategoryModel(text: 'Starters'),
     CategoryModel(text: '1953 special cusine'),
-    CategoryModel(text: 'Traditional Curries'),
+     CategoryModel(text: 'Traditional Curries'),
     CategoryModel(text: 'Tandoori Grills'),
     CategoryModel(text: 'Vegetarian Dishes'),
     CategoryModel(text: 'Biryani Dishes'),
     CategoryModel(text: 'Kids Menu'),
     CategoryModel(text: 'Rice And Breads'),
     CategoryModel(text: 'Pizza')
+   
   ];
 
   @override
@@ -48,7 +49,6 @@ List<CategoryModel> list = [
               scrollDirection: Axis.horizontal,
               child: Row(
                 children:
-                
                 List.generate(3, (index) {
                 var  e=list[index];
                    isSelected = currentSelected == e;
@@ -92,8 +92,8 @@ List<CategoryModel> list = [
                             });
                           },
                           child: Container(
-                              decoration: BoxDecoration(
-                                color: isSelected? Colors.blue : Colors.white
+                              decoration: const BoxDecoration(
+                                // color: isSelected? Colors.blue : Colors.white
                               ),
                             child: Text(list[i].text, style: TextStyle(
                               color: isSelected ? Colors.blue : Colors.black),))))
@@ -168,7 +168,8 @@ List<CategoryModel> list = [
                                   color: isSelected ? Colors.white : Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
-                          )),
+                          )
+                          ),
                         ),
                       ),
                     );
